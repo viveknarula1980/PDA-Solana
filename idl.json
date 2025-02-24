@@ -1,0 +1,378 @@
+{
+    "metadata": {
+      "address": "EjEJ9n8YohfJa1HXGWJGfvS8cHxFNyQBXxXWuc7PYAaJ",
+      "name": "simple_reward_system",
+      "version": "0.1.0",
+      "spec": "0.1.0",
+      "description": "Created with Anchor"
+    },
+    "instructions": [
+      {
+        "name": "complete_task",
+        "docs": [
+          "✅ Complete a Task & Earn Rewards"
+        ],
+        "discriminator": [
+          109,
+          167,
+          192,
+          41,
+          129,
+          108,
+          220,
+          196
+        ],
+        "accounts": [
+          {
+            "name": "user_account",
+            "writable": true,
+            "pda": {
+              "seeds": [
+                {
+                  "kind": "const",
+                  "value": [
+                    117,
+                    115,
+                    101,
+                    114
+                  ]
+                },
+                {
+                  "kind": "account",
+                  "path": "user"
+                }
+              ]
+            }
+          },
+          {
+            "name": "task_status",
+            "writable": true,
+            "pda": {
+              "seeds": [
+                {
+                  "kind": "const",
+                  "value": [
+                    116,
+                    97,
+                    115,
+                    107
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name": "user",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "receiver",
+            "writable": true
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          }
+        ],
+        "args": []
+      },
+      {
+        "name": "initialize",
+        "docs": [
+          "✅ Initialize Global State"
+        ],
+        "discriminator": [
+          175,
+          175,
+          109,
+          31,
+          13,
+          152,
+          155,
+          237
+        ],
+        "accounts": [
+          {
+            "name": "state",
+            "writable": true,
+            "pda": {
+              "seeds": [
+                {
+                  "kind": "const",
+                  "value": [
+                    115,
+                    116,
+                    97,
+                    116,
+                    101
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name": "admin",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          }
+        ],
+        "args": []
+      },
+      {
+        "name": "initialize_task",
+        "docs": [
+          "✅ Initialize Task Status Account (Must be done before completing tasks)"
+        ],
+        "discriminator": [
+          96,
+          206,
+          3,
+          20,
+          245,
+          167,
+          60,
+          125
+        ],
+        "accounts": [
+          {
+            "name": "task_status",
+            "writable": true,
+            "pda": {
+              "seeds": [
+                {
+                  "kind": "const",
+                  "value": [
+                    116,
+                    97,
+                    115,
+                    107
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name": "admin",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          }
+        ],
+        "args": []
+      },
+      {
+        "name": "initialize_user",
+        "docs": [
+          "✅ Initialize User Account (Required before `complete_task`)"
+        ],
+        "discriminator": [
+          111,
+          17,
+          185,
+          250,
+          60,
+          122,
+          38,
+          254
+        ],
+        "accounts": [
+          {
+            "name": "user_account",
+            "writable": true,
+            "pda": {
+              "seeds": [
+                {
+                  "kind": "const",
+                  "value": [
+                    117,
+                    115,
+                    101,
+                    114
+                  ]
+                },
+                {
+                  "kind": "account",
+                  "path": "user"
+                }
+              ]
+            }
+          },
+          {
+            "name": "user",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          }
+        ],
+        "args": []
+      },
+      {
+        "name": "update_task_availability",
+        "docs": [
+          "✅ Update Task Availability (Admin Only)"
+        ],
+        "discriminator": [
+          171,
+          132,
+          140,
+          89,
+          187,
+          53,
+          149,
+          117
+        ],
+        "accounts": [
+          {
+            "name": "task_status",
+            "writable": true,
+            "pda": {
+              "seeds": [
+                {
+                  "kind": "const",
+                  "value": [
+                    116,
+                    97,
+                    115,
+                    107
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name": "admin",
+            "writable": true,
+            "signer": true
+          }
+        ],
+        "args": [
+          {
+            "name": "is_available",
+            "type": "bool"
+          }
+        ]
+      }
+    ],
+    "accounts": [
+      {
+        "name": "GlobalState",
+        "discriminator": [
+          163,
+          46,
+          74,
+          168,
+          216,
+          123,
+          133,
+          98
+        ]
+      },
+      {
+        "name": "TaskStatus",
+        "discriminator": [
+          11,
+          118,
+          126,
+          175,
+          127,
+          209,
+          24,
+          30
+        ]
+      },
+      {
+        "name": "UserAccount",
+        "discriminator": [
+          211,
+          33,
+          136,
+          16,
+          186,
+          110,
+          242,
+          127
+        ]
+      }
+    ],
+    "errors": [
+      {
+        "code": 6000,
+        "name": "TaskUnavailable",
+        "msg": "Task is not available."
+      },
+      {
+        "code": 6001,
+        "name": "CooldownNotMet",
+        "msg": "Cooldown time not met."
+      },
+      {
+        "code": 6002,
+        "name": "InvalidReceiver",
+        "msg": "Invalid receiver address. Cannot transfer to self."
+      }
+    ],
+    "types": [
+      {
+        "name": "GlobalState",
+        "docs": [
+          "**📌 Account Structs**"
+        ],
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "total_users",
+              "type": "u64"
+            },
+            {
+              "name": "total_tasks",
+              "type": "u64"
+            }
+          ]
+        }
+      },
+      {
+        "name": "TaskStatus",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "is_available",
+              "type": "bool"
+            },
+            {
+              "name": "last_updated",
+              "type": "i64"
+            }
+          ]
+        }
+      },
+      {
+        "name": "UserAccount",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "total_rewards",
+              "type": "u64"
+            },
+            {
+              "name": "last_completed",
+              "type": "i64"
+            }
+          ]
+        }
+      }
+    ]
+  }

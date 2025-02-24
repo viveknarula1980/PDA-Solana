@@ -1,0 +1,30 @@
+{
+    "metadata": {
+        "address" : "H7gmtUmi4yVY2ATjEZQ8328WxdrsSMpqGBbkkw85E4Mm"
+    },
+    "version": "0.1.0",
+    "name": "reward_system",
+    "instructions": [
+        {
+            "name": "sendReward",
+            "accounts": [
+                {
+                    "name": "payer",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "recipient",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "systemProgram",
+                    "isMut": false,
+                    "isSigner": false
+                }
+            ],
+            "args": []
+        }
+    ]
+}
